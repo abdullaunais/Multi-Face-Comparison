@@ -35,10 +35,12 @@ def test_image(image_to_check, known_names, known_face_encodings):
         for unknown_encoding in unknown_encodings:
             result = face_recognition.compare_faces(known_face_encodings, unknown_encoding)
             distance = face_recognition.face_distance(known_face_encodings, unknown_encoding)
-            # print(distance[0])
             # print("True") if True in result else print("False ")
 
-        return distance[0],result[0]
+        if len(distance) == 0 or len(result) == 0:
+            return "0",False
+        else:
+            return distance[0],result[0]
     else:
         return "0","Many Faces or No Faces"
 
@@ -51,6 +53,8 @@ def image_files_in_folder(folder):
 def main(known_people_folder, image_to_check):
     known_names, known_face_encodings = scan_known_people(known_people_folder)
     distance,result=test_image(image_to_check, known_names, known_face_encodings)
+    print(distance)
+    print(result)
     return distance,result
 
 if __name__ == "__main__":
