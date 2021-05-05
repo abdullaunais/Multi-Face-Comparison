@@ -12,11 +12,11 @@ import detect_face
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
- 
 
 
 @app.route('/api/v1/compare_faces', methods=['POST'])
 def compare_faces():
+    print('Incoming compare_faces request')
     target = request.files['target']
     faces =  request.files.getlist("faces")
     target_filename=secure_filename(target.filename)
@@ -34,6 +34,8 @@ def compare_faces():
             }
         response.append(json_contect)
     python2json = json.dumps(response)
+    print('Finished processing compare_faces request')
+    print(python2json)
     return app.response_class(python2json, content_type='application/json') 
 
 
@@ -57,4 +59,8 @@ def detect_faces():
     return app.response_class(python2json, content_type='application/json') 
 
 if __name__ == "__main__":
-    app.run(debug=True,host="0.0.0.0",port=8000)
+    with open("config.json") as extConfigFile:
+        extConfig = json.load(extConfigFile)
+    print('Loaded Configurations from config.json')
+    print(extConfig)
+    app.run(debug=extConfig['debug'],host=extConfig['hostname'],port=extConfig['port'])
