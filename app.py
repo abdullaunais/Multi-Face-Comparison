@@ -14,7 +14,7 @@ with open("config.json") as extConfigFile:
     extConfig = json.load(extConfigFile)
 
 logger = logging.getLogger('app')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(extConfig['logger']['level'])
 
 # Here we define our formatter
 formatter = logging.Formatter(
@@ -23,7 +23,7 @@ formatter = logging.Formatter(
 logHandler = handlers.TimedRotatingFileHandler(extConfig['logger']['file'], when=extConfig['logger']['rollWhen'],
                                                interval=extConfig['logger']['interval'],
                                                backupCount=extConfig['logger']['backupCount'])
-logHandler.setLevel(logging.DEBUG)
+logHandler.setLevel(extConfig['logger']['level'])
 logHandler.setFormatter(formatter)
 
 logger.addHandler(logHandler)
@@ -79,12 +79,12 @@ def detect_faces():
         end = time.time()
         time_taken = round(end - start, 3)
         logger.info("Time taken for %s : %s", face.filename, time_taken)
-        json_contect = {
+        json_content = {
             'coordinates': result,
             'time_taken': time_taken,
             'image_name': secure_filename(face.filename)
         }
-        response.append(json_contect)
+        response.append(json_content)
     python2json = json.dumps(response)
     logger.info('finished processing detect_faces request')
     logger.info(python2json)

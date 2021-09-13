@@ -3,10 +3,12 @@
 	"port": 6666,
 	"debug": true,
 	"logger": {
-		"file": "./facial-recognition.log",
+		"level": 10,
+		"file": "/apps/dev/pfs/app/bnk/bin/logs/facial-recognition.log",
 		"rollWhen": "midnight",
 		"interval": 1,
 		"backupCount": 0,
-		"_rollWhen": "supports # [midnight] - roll over at midnight, # [S] - every second # [M] - every minute # [H] - every hour # [D] - every day, # [W{0-6}] - roll over on a certain day; 0 - Monday"
+		"_levelComment": "supports CRITICAL = [50], ERROR = [40], WARNING = [30], INFO = [20], DEBUG = [10], NOTSET = [0]",
+		"_rollWhenComment": "supports # [midnight] - roll over at midnight, # [S] - every second # [M] - every minute # [H] - every hour # [D] - every day, # [W{0-6}] - roll over on a certain day; 0 - Monday"
 	}
 }
