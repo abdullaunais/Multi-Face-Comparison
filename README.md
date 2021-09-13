@@ -10,9 +10,9 @@ Another File is app.py. This file is api which can be attached to website or oth
 ## Requirment
 
 ```
-pip install face_recognition
-pip install flask
-pip install scipy
+pip3 install face_recognition
+pip3 install flask
+pip3 install scipy
 ```
 # Run
 ```

@@ -1,5 +1,12 @@
 {
 	"hostname": "0.0.0.0",
 	"port": 6666,
-	"debug": true
+	"debug": true,
+	"logger": {
+		"file": "./facial-recognition.log",
+		"rollWhen": "midnight",
+		"interval": 1,
+		"backupCount": 0,
+		"_rollWhen": "supports # [midnight] - roll over at midnight, # [S] - every second # [M] - every minute # [H] - every hour # [D] - every day, # [W{0-6}] - roll over on a certain day; 0 - Monday"
+	}
 }
